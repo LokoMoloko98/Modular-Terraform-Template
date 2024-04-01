@@ -29,7 +29,7 @@ resource "aws_instance" "dev_node" {
   provisioner "local-exec" {
     command = templatefile("${var.host_os}-ssh-config.tpl", {
       hostname = self.public_ip,
-      user     = "ubuntu",
+      user     = "ec2-user",
     identityfile = "~/.ssh/devnode" })
     interpreter = var.host_os == "windows" ? ["Powershell", "-Command"] : ["bash", "-c"]
   }
