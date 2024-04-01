@@ -23,7 +23,7 @@ aws ec2 create-tags --resources $INSTANCE_ID --tags Key=Name,Value="$NEW_NAME_TA
 DOMAIN_NAME="moloko-mokubedi.co.za"
 LOWERCASE_TENANT_ID="devnode"
 RECORD_NAME="$LOWERCASE_TENANT_ID.$DOMAIN_NAME."
-HOSTED_ZONE_ID="Z0813318CUEYPH91ZE2Q" # replace with your Route53 Hosted Zone ID
+HOSTED_ZONE_ID=${hostzone} # replace with your Route53 Hosted Zone ID
 TTL=300 # time to live for the record in seconds
 
 

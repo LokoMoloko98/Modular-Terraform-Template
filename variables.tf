@@ -48,3 +48,7 @@ variable "host_os" {
   type    = string
   default = "linux"
 }
+
+variable "hostzone" {
+  type = string
+}
