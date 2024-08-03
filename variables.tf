@@ -36,19 +36,12 @@ variable "ami_id" {
   default     = "ami-0df435f331839b2d6"
 }
 
-
-#security-group variable
-variable "ssh_location" {
-  description = "ip address that can ssh into the server, it should be manually changed after provisioning"
-  type        = string
-  default     = "41.216.203.213/32"
-}
-
 variable "host_os" {
   type    = string
   default = "linux"
 }
 
-variable "hostzone" {
+variable "hostzone_id" {
   type = string
+  default = "Z0813318CUEYPH91ZE2Q"
 }

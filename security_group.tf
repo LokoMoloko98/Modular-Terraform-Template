@@ -34,10 +34,14 @@ resource "aws_vpc_security_group_ingress_rule" "http_ingress" {
   }
 }
 
+data "external" "myipaddr" {
+  program = ["bash", "-c", "curl -s 'https://api.ipify.org?format=json'"]
+}
+
 resource "aws_vpc_security_group_ingress_rule" "ssh_ingress" {
   security_group_id = aws_security_group.security_group.id
   description       = "Secure Shell (SSH)"
-  cidr_ipv4         = var.ssh_location
+  cidr_ipv4         = "${data.external.myipaddr.result.ip}/32"
   from_port         = 22
   ip_protocol       = "tcp"
   to_port           = 22

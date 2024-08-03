@@ -1,3 +1,3 @@
-output "dev_ip" {
-  value = aws_instance.dev_node.public_ip
+output "ec2-vm-ip" {
+  value = aws_instance.modular-template-node.public_ip
 }
