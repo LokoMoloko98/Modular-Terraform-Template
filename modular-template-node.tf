@@ -14,7 +14,7 @@ data "template_file" "user_data" {
 resource "aws_instance" "modular-template-node" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
-  key_name               = var.ssh-key-pair
+  key_name               = var.ssh_key_pair
   iam_instance_profile   = aws_iam_instance_profile.ec2_profile.id
   user_data              = data.template_file.user_data.rendered
   vpc_security_group_ids = [aws_security_group.security_group.id]
