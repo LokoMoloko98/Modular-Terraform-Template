@@ -17,7 +17,7 @@ resource "aws_instance" "modular-template-node" {
   key_name               = var.ssh_key_pair
   iam_instance_profile   = var.instance_profile
   user_data              = data.template_file.user_data.rendered
-  vpc_security_group_ids = [aws_security_group.security_group.id]
+  vpc_security_group_ids = [var.security_group_id]
   subnet_id              = var.subnet_id
 
   root_block_device {

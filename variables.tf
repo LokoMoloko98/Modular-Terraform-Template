@@ -21,18 +21,18 @@ variable "public_subnet_az1_cidr" {
   type        = string
 }
 
-# variable "instance_type" {
-#   type    = string
-# }
+variable "instance_type" {
+  type = string
+}
 
-# variable "ami_id" {
-#   type        = string
-# }
+variable "ami_id" {
+  type = string
+}
 
-# variable "host_os" {
-#   type    = string
-# }
+variable "host_os" {
+  type = string
+}
 
-# variable "ssh_key_pair" {
-#   type    = string
-# }
+variable "ssh_key_pair" {
+  type = string
+}
