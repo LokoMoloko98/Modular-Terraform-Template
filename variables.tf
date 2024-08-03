@@ -45,3 +45,7 @@ variable "hostzone_id" {
   type = string
   default = "Z0813318CUEYPH91ZE2Q"
 }
+
+variable "ssh-key-pair" {
+  type = string
+}

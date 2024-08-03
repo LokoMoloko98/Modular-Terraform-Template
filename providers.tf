@@ -10,3 +10,9 @@ provider "aws" {
   region  = "us-east-1"
   profile = "default"
 }
+
+provider "tls" {
+  proxy {
+    url = "https://corporate.proxy.service"
+  }
+}

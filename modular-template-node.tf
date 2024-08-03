@@ -6,9 +6,23 @@ data "template_file" "user_data" {
   }
 }
 
+resource "tls_private_key" "modular-template-ssh-key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
 resource "aws_key_pair" "modular-template_auth" {
-  key_name   = "id_rsa"
-  public_key = file("~/.ssh/id_rsa.pub")
+  key_name   = var.ssh-key-pair
+  public_key = tls_private_key.modular-template-ssh-key.public_key_openssh
+
+  provisioner "local-exec" { 
+    command = "echo '${tls_private_key.modular-template-ssh-key.private_key_pem}' > ~/.ssh/'${var.ssh-key-pair}'.pem"
+  }
+
+   provisioner "local-exec" { 
+    command = "chmod 400 ~/.ssh/${var.ssh-key-pair}.pem"
+  }
+
 }
 
 resource "aws_instance" "modular-template-node" {
@@ -31,7 +45,7 @@ resource "aws_instance" "modular-template-node" {
     command = templatefile("${var.host_os}-ssh-config.tpl", {
       hostname = self.public_ip,
       user     = "ec2-user",
-    identityfile = "~/.ssh/id_rsa" })
+    identityfile = "~/.ssh/'${var.ssh-key-pair}'.pem" })
     interpreter = var.host_os == "windows" ? ["Powershell", "-Command"] : ["bash", "-c"]
   }
 }
