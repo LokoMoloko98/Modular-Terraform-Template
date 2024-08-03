@@ -1,8 +1,13 @@
+data "aws_ssm_parameter" "route_53_hostzone_id" {
+  name = "route_53_hostzone_id"
+  with_decryption = true
+} 
+
 data "template_file" "user_data" {
   template = file("${path.module}/user_data.sh")
   vars = {
     region = var.region
-    hostzone = var.hostzone_id
+    hostzone = data.aws_ssm_parameter.route_53_hostzone_id.value
   }
 }
 

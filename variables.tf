@@ -8,7 +8,7 @@ variable "region" {
 variable "project_name" {
   description = "project name"
   type        = string
-  default     = "Dev-EC2"
+  default     = "Modular-Terraform-Template"
 }
 
 #VPC variable
@@ -41,11 +41,7 @@ variable "host_os" {
   default = "linux"
 }
 
-variable "hostzone_id" {
-  type = string
-  default = "Z0813318CUEYPH91ZE2Q"
-}
-
 variable "ssh-key-pair" {
   type = string
+  default = "modular-template-ssh-key-pair"
 }
