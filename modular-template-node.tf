@@ -19,15 +19,6 @@ resource "tls_private_key" "modular-template-ssh-key" {
 resource "aws_key_pair" "modular-template_auth" {
   key_name   = var.ssh-key-pair
   public_key = tls_private_key.modular-template-ssh-key.public_key_openssh
-
-  provisioner "local-exec" {
-    command = "echo '${tls_private_key.modular-template-ssh-key.private_key_pem}' > ~/.ssh/'${var.ssh-key-pair}'.pem"
-  }
-
-  provisioner "local-exec" {
-    command = "chmod 400 ~/.ssh/${var.ssh-key-pair}.pem"
-  }
-
 }
 
 resource "aws_instance" "modular-template-node" {
