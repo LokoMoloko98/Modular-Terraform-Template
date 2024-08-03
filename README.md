@@ -1,6 +1,5 @@
 # Moduler Terrraform Template
-
-This repository contains Terraform configuration files to easily provision a development environment on AWS. The setup includes the creation of a Virtual Private Cloud (VPC) with a public subnet, instance role with specific permissions, and launching an EC2 instance within the VPC. The EC2 instance is configured with user data script for various tasks including updating the VM, installing Docker, managing instance names, making Route53 changes, and deploying a Docker container.
+Terraform Template to quickly provision AWS virtual infrastructure in a modular pattern 
 
 ## Features
 
