@@ -6,12 +6,6 @@ terraform {
   }
 }
 
-provider "tls" {
-  proxy {
-    url = "https://corporate.proxy.service"
-  }
-}
-
 provider "aws" {
   region = var.region
   default_tags {
