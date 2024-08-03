@@ -42,6 +42,6 @@ variable "host_os" {
 }
 
 variable "ssh-key-pair" {
-  type = string
+  type    = string
   default = "modular-template-ssh-key-pair"
 }

@@ -13,7 +13,7 @@ provider "tls" {
 }
 
 provider "aws" {
-  region  = var.region
+  region = var.region
   default_tags {
     tags = {
       "Automation" = "terraform"

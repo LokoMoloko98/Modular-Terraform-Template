@@ -1,12 +1,12 @@
 data "aws_ssm_parameter" "route_53_hostzone_id" {
-  name = "route_53_hostzone_id"
+  name            = "route_53_hostzone_id"
   with_decryption = true
-} 
+}
 
 data "template_file" "user_data" {
   template = file("${path.module}/user_data.sh")
   vars = {
-    region = var.region
+    region   = var.region
     hostzone = data.aws_ssm_parameter.route_53_hostzone_id.value
   }
 }
@@ -20,11 +20,11 @@ resource "aws_key_pair" "modular-template_auth" {
   key_name   = var.ssh-key-pair
   public_key = tls_private_key.modular-template-ssh-key.public_key_openssh
 
-  provisioner "local-exec" { 
+  provisioner "local-exec" {
     command = "echo '${tls_private_key.modular-template-ssh-key.private_key_pem}' > ~/.ssh/'${var.ssh-key-pair}'.pem"
   }
 
-   provisioner "local-exec" { 
+  provisioner "local-exec" {
     command = "chmod 400 ~/.ssh/${var.ssh-key-pair}.pem"
   }
 
@@ -46,11 +46,11 @@ resource "aws_instance" "modular-template-node" {
     encrypted             = "true"
   }
 
-  provisioner "local-exec" {
-    command = templatefile("${var.host_os}-ssh-config.tpl", {
-      hostname = self.public_ip,
-      user     = "ec2-user",
-    identityfile = "~/.ssh/'${var.ssh-key-pair}'.pem" })
-    interpreter = var.host_os == "windows" ? ["Powershell", "-Command"] : ["bash", "-c"]
-  }
+  # provisioner "local-exec" {
+  #   command = templatefile("${var.host_os}-ssh-config.tpl", {
+  #     hostname = self.public_ip,
+  #     user     = "ec2-user",
+  #   identityfile = "~/.ssh/'${var.ssh-key-pair}'.pem" })
+  #   interpreter = var.host_os == "windows" ? ["Powershell", "-Command"] : ["bash", "-c"]
+  # }
 }
