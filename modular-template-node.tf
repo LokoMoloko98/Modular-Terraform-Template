@@ -11,20 +11,10 @@ data "template_file" "user_data" {
   }
 }
 
-resource "tls_private_key" "modular-template-ssh-key" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
-
-resource "aws_key_pair" "modular-template_auth" {
-  key_name   = var.ssh-key-pair
-  public_key = tls_private_key.modular-template-ssh-key.public_key_openssh
-}
-
 resource "aws_instance" "modular-template-node" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
-  key_name               = aws_key_pair.modular-template_auth.id
+  key_name               = var.ssh-key-pair
   iam_instance_profile   = aws_iam_instance_profile.ec2_profile.id
   user_data              = data.template_file.user_data.rendered
   vpc_security_group_ids = [aws_security_group.security_group.id]
